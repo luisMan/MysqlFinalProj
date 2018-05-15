@@ -48,6 +48,7 @@ public class sqlThread extends AnimationTimer{
             
             //render sqlTables
             renderSqlTables();
+            renderSqlConstraints();
             animateUIPane();
             
             //log("our thread is running!");
@@ -103,6 +104,43 @@ public class sqlThread extends AnimationTimer{
                     }
                     
                 }//close if
+               
+               }//close viewport
+           }//close while
+           
+           
+       }//close if
+   }
+   
+   public void renderSqlConstraints()
+   {
+       if(view.getSqlTableMap().size()>0)
+       {
+           Set tableSet =  view.getSqlTableMap().entrySet();
+           Iterator it  = tableSet.iterator();
+           while(it.hasNext())
+           {
+               Map.Entry k =  (Map.Entry)it.next();
+               String tableName =  k.getKey().toString();
+               SqlTable table = (SqlTable)k.getValue();
+               double x =  table.getNodeX() + view.getViewPort().getViewPortX();
+               double y = table.getNodeY() + view.getViewPort().getViewPortY();
+               
+               
+               if(isOnViewPortToRender(x,y)){
+                 
+                    //lets render the connected line 
+                    if(table.getTableConstraints().size() > 0)
+                    {
+                        for(SqlTable t: table.getTableConstraints()){
+                        double tox = t.getNodeX() + view.getViewPort().getViewPortX();
+                        double toy =  t.getNodeY() + view.getViewPort().getViewPortY();
+                            
+                        context.setFill(Color.AQUA);
+                        context.setLineWidth(10);
+                        context.strokeLine(x, y, tox, toy);
+                        }
+                    }
                
                }//close viewport
            }//close while

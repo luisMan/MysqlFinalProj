@@ -14,6 +14,7 @@ import java.util.TreeMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
@@ -35,6 +36,7 @@ public class WidgetComponentEventHandler implements EventHandler<ActionEvent>{
     @Override
     public void handle(ActionEvent event) {
        //lets check for action event to widget and text and many more ui components
+       if(event.getSource() instanceof Button){
        String text = ((Button)event.getSource()).getText();
        //log("the event name = "+text);
        if(text.toLowerCase().equals("setschemaname"))
@@ -94,6 +96,23 @@ public class WidgetComponentEventHandler implements EventHandler<ActionEvent>{
               //save table data to renders
               view.saveAllDataComponentsForTableWithKey(key[1]);
           }
+       }
+       
+       }else if(event.getSource() instanceof CheckBox){
+              
+           String text = ((CheckBox)event.getSource()).getId();
+           
+           if(text.toLowerCase().equals("constraintcreation"))
+           {
+              if(!view.onConstraintCreationActive){
+                  view.onConstraintCreationActive = true;
+              }else{
+                  view.onConstraintCreationActive = false;
+              }
+             
+          
+           }
+           
        }
        
        

@@ -60,7 +60,11 @@ public class SqlPane extends StackPane {
     private Button Tables;
     private Button closeTables;
     private Button closeConstraints;
+    public CheckBox createConstraint;
+    public boolean onConstraintCreationActive = false;
     private HBox tableBoxGrid;
+    public SqlTable fromNode=null;
+    public SqlTable toNode=null;
     private SqlViewPort viewport;
     private HashMap<String,SqlTable> tables;
     private HashMap<String,ArrayList<SqlTupple>>tupples;
@@ -183,7 +187,9 @@ public class SqlPane extends StackPane {
             GridPane grid = new GridPane();
             GridPane footer = new GridPane();
             schemaName = new TextField();
-            Label schemaLevel =  new Label("Schema Name : ");    
+            Label schemaLevel =  new Label("Schema Name : ");  
+            Label constraintName =  new Label("Create Constraint : ");
+            constraintName.setStyle("-fx-font-family: \"Segoe UI Semibold\";\n" +" -fx-font-size:28px;   -fx-text-fill: white;");
             schemaLevel.setStyle("-fx-font-family: \"Segoe UI Semibold\";\n" +" -fx-font-size:28px;   -fx-text-fill: white;");
             setName = new Button("SetSchemaName");
             setName.setOnAction(widgetComponentEventHandler);
@@ -195,6 +201,9 @@ public class SqlPane extends StackPane {
             constraints.setOnAction(widgetComponentEventHandler);
             Tables = new Button("tables");
             Tables.setOnAction(widgetComponentEventHandler);
+            createConstraint = new CheckBox();
+            createConstraint.setId("constraintCreation");
+            createConstraint.setOnAction(widgetComponentEventHandler);
          
             
             
@@ -204,6 +213,8 @@ public class SqlPane extends StackPane {
             grid.add(schemaName, 1, 0);
             grid.add(saveSchema, 3, 0);
             grid.add(loadSchema, 4, 0);
+            grid.add(constraintName,5,0);
+            grid.add(createConstraint,6,0);
             top.getChildren().add(grid);
           
             footer.add(constraints,0,0);

@@ -24,6 +24,7 @@ public class SqlTable implements Serializable{
     private String name;
      transient private Color color ;
     private ArrayList<SqlTupple>sqlTupples;
+    private ArrayList<SqlTable>constraints;
    
     public SqlTable(String name ,double x, double y, double z)
     {
@@ -32,6 +33,7 @@ public class SqlTable implements Serializable{
         this.y=y;
         this.z=z;
         sqlTupples = new ArrayList<SqlTupple>();
+        constraints = new ArrayList<SqlTable>();
              
     }
     public Rectangle getRectangle()
@@ -41,10 +43,16 @@ public class SqlTable implements Serializable{
     
     public ArrayList<SqlTupple> getTableTupples()
     {return this.sqlTupples;}
+    public ArrayList<SqlTable> getTableConstraints()
+    {return this.constraints;}
    
     public void addTuple(String key, SqlTupple val)
     {
         sqlTupples.add(val);
+    }
+    public void addSqlTableConstraints(SqlTable constraint)
+    {
+        constraints.add(constraint);
     }
     
     public void addTuppleObject(ArrayList<SqlTupple>sqlT)

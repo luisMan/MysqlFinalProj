@@ -35,6 +35,14 @@ public class MouseEventHandler implements EventHandler<MouseEvent>{
         //lets detech event type
         if(event.getEventType() == MouseEvent.MOUSE_PRESSED)
         {
+            
+            if(event.getButton() == MouseButton.PRIMARY && view.onConstraintCreationActive)
+            {
+                if(view.fromNode==null)
+                {
+                    
+                }
+            }
             if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() ==2)
             {
                 if(view.getSchemaName().getText().length()==0)
